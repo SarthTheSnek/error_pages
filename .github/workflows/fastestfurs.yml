@@ -1,12 +1,12 @@
-name: Fastest Furs Error Pages
+name: Error Page - Build & Release
 
 on:
   push:
-    paths:
-      - 'fastestfurs/**'
+    branches:
+      - master
   pull_request:
-    paths:
-      - 'fastestfurs/**'
+    branches:
+      - master
 
   workflow_dispatch:
 
@@ -20,14 +20,12 @@ jobs:
           node_version: 12
 
       - name: Setup Yarn Environment
-        run: |
-          yarn install
+        run: yarn install
 
       # Run tests here
 
       - name: Compile Pug & Sass Files
-        run: |
-          yarn build
+        run: yarn build
 
       - name: Compress Files for Distribution
         run: |
