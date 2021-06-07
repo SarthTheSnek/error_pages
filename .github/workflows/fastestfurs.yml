@@ -47,6 +47,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Release
+        id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -54,3 +55,25 @@ jobs:
           tag_name: ${{ steps.tag_version.outputs.new_tag }}
           release_name: Release ${{ steps.tag_version.outputs.new_tag }}
           body: ${{ steps.tag_version.outputs.changelog }}
+
+      - name: Upload Release Asset \#1
+        id: upload-release-asset-1
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./error-pages-*.tar.gz
+          asset_name: ./error-pages.tar.gz
+          asset_content_type: application/x-gtar
+
+      - name: Upload Release Asset \#2
+        id: upload-release-asset-2
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./error-pages-*.tar.bz2
+          asset_name: ./error-pages.tar.bz2
+          asset_content_type: application/x-gtar
