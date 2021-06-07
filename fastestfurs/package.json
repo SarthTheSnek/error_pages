@@ -21,6 +21,7 @@
   "author": "SarthTheSnek <34319569+SarthTheSnek@users.noreply.github.com>",
   "license": "ISC",
   "dependencies": {
+    "concurrently": "^6.2.0",
     "pug": "^3.0.2",
     "pug-cli": "^1.0.0-alpha6",
     "sass": "^1.34.1"
