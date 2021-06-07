@@ -31,9 +31,8 @@ jobs:
         run: |
           mkdir error_pages
           mv *.html *.css error_pages/
-          VERSION=$(jq .version package.json)
-          tar czf error_pages-$VERSION.tar.gz error_pages/
-          tar cjf error_pages-$VERSION.tar.bz2 error_pages/
+          tar czf error_pages.tar.gz error_pages/
+          tar cjf error_pages.tar.bz2 error_pages/
 
       - name: Bump Version and Push Tag
         id: tag_version
@@ -58,7 +57,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./error-pages-*.tar.gz
+          asset_path: ./error-pages.tar.gz
           asset_name: ./error-pages.tar.gz
           asset_content_type: application/x-gtar
 
@@ -69,6 +68,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./error-pages-*.tar.bz2
+          asset_path: ./error-pages.tar.bz2
           asset_name: ./error-pages.tar.bz2
           asset_content_type: application/x-gtar
