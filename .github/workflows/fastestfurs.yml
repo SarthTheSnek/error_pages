@@ -21,19 +21,16 @@ jobs:
 
       - name: Setup Yarn Environment
         run: |
-          cd fastestfurs/
           yarn install
 
       # Run tests here
 
       - name: Compile Pug & Sass Files
         run: |
-          cd fastestfurs/
           yarn build
 
       - name: Compress Files for Distribution
         run: |
-          cd fastestfurs/
           mkdir error_pages
           mv *.html *.css error_pages/
           VERSION=$(jq .version package.json)
