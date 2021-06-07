@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node_version: 12
+          node-version: 14
 
       - name: Setup Yarn Environment
         run: yarn install
@@ -33,6 +33,7 @@ jobs:
           mv *.html *.css error_pages/
           tar czf error_pages.tar.gz error_pages/
           tar cjf error_pages.tar.bz2 error_pages/
+          ls -al
 
       - name: Bump Version and Push Tag
         id: tag_version
