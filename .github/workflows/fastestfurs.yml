@@ -1,0 +1,58 @@
+name: Fastest Furs Error Pages
+
+on:
+  push:
+    paths:
+      - 'fastestfurs/**'
+  pull_request:
+    paths:
+      - 'fastestfurs/**'
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node_version: 12
+      - run: npm ci
+      - run: npm test
+
+      - name: Setup Yarn Environment
+        run: |
+          cd fastestfurs/
+          yarn install
+
+      # Run tests here
+
+      - name: Compile Pug & Sass Files
+        run: |
+          cd fastestfurs/
+          yarn build
+
+      - name: Compress Files for Distribution
+        run: |
+          cd fastestfurs/
+          mkdir error_pages
+          mv *.html *.css error_pages/
+          VERSION=$(jq .version package.json)
+          tar czf error_pages-$VERSION.tar.gz error_pages/
+          tar cjf error_pages-$VERSION.tar.bz2 error_pages/
+
+      - name: Bump Version and Push Tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v5.5
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.tag_version.outputs.new_tag }}
+          release_name: Release ${{ steps.tag_version.outputs.new_tag }}
+          body: ${{ steps.tag_version.outputs.changelog }}
