@@ -58,8 +58,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./error-pages.tar.gz
-          asset_name: ./error-pages.tar.gz
+          asset_path: ./error_pages.tar.gz
+          asset_name: ./error_pages.tar.gz
           asset_content_type: application/x-gtar
 
       - name: Upload Release Asset \#2
@@ -69,6 +69,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./error-pages.tar.bz2
-          asset_name: ./error-pages.tar.bz2
+          asset_path: ./error_pages.tar.bz2
+          asset_name: ./error_pages.tar.bz2
           asset_content_type: application/x-gtar
