@@ -1,6 +1,6 @@
 {
   "name": "fastestfurs_errors",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Customized error pages for Fastest Furs sites.",
   "scripts": {
     "build": "concurrently \"yarn compile-sass\" \"yarn compile-pug\"",
