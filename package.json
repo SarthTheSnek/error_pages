@@ -4,7 +4,7 @@
   "description": "Customized error pages for Fastest Furs sites.",
   "scripts": {
     "build": "concurrently \"yarn compile-sass\" \"yarn compile-pug\"",
-    "compile-sass": "sass 403.scss:403.css 404.scss:404.css 500.scss:500.css",
+    "compile-sass": "sass 400.scss:400.css 401.scss:401.css 403.scss:403.css 404.scss:404.css 405.scss:405.css 418.scss:418.css 500.scss:500.css 502.scss:502.css 503.scss:503.css",
     "compile-pug": "node compile.js"
   },
   "repository": {
